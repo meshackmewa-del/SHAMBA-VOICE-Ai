@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shamba Voices | Voice-First AI Agronomy Co-Pilot</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    .gradient-bg { background: linear-gradient(135deg, #065f46 0%, #047857 100%); }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans flex flex-col min-h-screen">
+
+  <!-- Nav -->
+  <nav class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <i class="fa-solid fa-microphone-lines text-green-300 text-2xl"></i>
+        <span class="font-bold text-xl tracking-tight">Shamba Voices</span>
+      </div>
+      <a href="#demo" class="bg-green-500 hover:bg-green-400 text-slate-900 font-semibold px-4 py-2 rounded-lg text-sm">
+        Test Simulator
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="gradient-bg text-white py-16 px-4 text-center">
+    <div class="max-w-4xl mx-auto space-y-4">
+      <span class="bg-green-900/60 text-green-300 text-xs font-semibold px-3 py-1 rounded-full uppercase border border-green-700">
+        Wavumbuzi Challenge Entry
+      </span>
+      <h1 class="text-4xl md:text-5xl font-extrabold">Voice-First AI Agronomy & Green Biotech</h1>
+      <p class="text-base text-green-100 max-w-2xl mx-auto">
+        Zero app downloads. Instant crop disease diagnosis and biopesticide recommendations via Swahili voice notes.
+      </p>
+    </div>
+  </header>
+
+  <!-- Interactive Sandbox -->
+  <section id="demo" class="py-12 max-w-4xl mx-auto px-4 w-full">
+    <div class="text-center mb-8">
+      <h2 class="text-3xl font-bold text-slate-900">Interactive Swahili Voice Sandbox</h2>
+      <p class="text-slate-600 mt-2">Simulate sending a Swahili WhatsApp audio query to Shamba Voices.</p>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-xl border border-slate-200 p-6 space-y-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <button onclick="runSim('fall_armyworm')" class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-green-500 text-left">
+          <div class="font-bold text-slate-800">🌽 Maize Leaf Query</div>
+          <p class="text-xs text-slate-500 mt-1">"Majani ya mahindi yangu yameliwa na wadudu..."</p>
+        </button>
+        <button onclick="runSim('late_blight')" class="p-4 rounded-xl border border-slate-200 bg-slate-50 hover:border-green-500 text-left">
+          <div class="font-bold text-slate-800">🍅 Tomato Blight Query</div>
+          <p class="text-xs text-slate-500 mt-1">"Majani ya nyanya yana madoa ya kahawia..."</p>
+        </button>
+      </div>
+
+      <div id="output" class="bg-slate-50 p-4 rounded-xl border border-slate-200 text-sm italic text-slate-600">
+        Select a voice query above to simulate Shamba Voices processing...
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="mt-auto bg-slate-900 text-slate-400 py-8 text-center border-t border-slate-800">
+    <p class="text-slate-300 font-medium">Shamba Voices &copy; Wavumbuzi Challenge Concept Entry</p>
+    <p class="text-xs text-slate-500">Conceived, Designed, and Engineered by <span class="text-green-400 font-semibold">Meshack Mewa</span></p>
+  </footer>
+
+  <script>
+    const simData = {
+      fall_armyworm: "Huo ni wadudu wa jeshi (Fall Armyworm). Shamba Voices inapendekeza kutumia dawa ya asili ya mwarobaini au Bt bio-pesticide asubuhi na mapema.",
+      late_blight: "Hiyo ni ugonjwa wa ukungu (Late Blight). Ondoa majani yaliyoathirika haraka na utumie dawa ya shaba ya kiasili kuzuia kuenea."
+    };
+
+    function runSim(type) {
+      const text = simData[type];
+      document.getElementById('output').innerHTML = `<strong>Shamba Voices Swahili Audio Reply:</strong><br>"${text}"`;
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'sw-KE';
+        window.speechSynthesis.speak(u);
+      }
+    }
+  </script>
+</body>
+</html>
